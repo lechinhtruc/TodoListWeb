@@ -23,7 +23,7 @@ namespace TodoListWeb.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<TodosModel> todoList = _db.tbl_todos.ToList();
+            IEnumerable<TodosModel> todoList = _db.tbl_todos.ToList().OrderBy(x => x.Id);
             return View(todoList);
         }
 
@@ -32,10 +32,37 @@ namespace TodoListWeb.Controllers
             return View();
         }
 
-        //public IActionResult privacy()
-        //{
-        //    return View();
-        //}
+        public IActionResult Update(Int64 id)
+        {
+            return View(_db.tbl_todos.Find(id));
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(TodosModel todos)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(todos);
+            }
+            _db.tbl_todos.Add(todos);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpPatch]
+        [ValidateAntiForgeryToken]
+        public IActionResult Update(TodosModel todo)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(todo);
+            }
+            _db.tbl_todos.Update(todo);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

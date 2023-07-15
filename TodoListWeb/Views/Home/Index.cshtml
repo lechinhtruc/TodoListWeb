@@ -5,14 +5,13 @@
 @model IEnumerable<TodosModel>
 
 <div class="d-flex w-50 mb-2 justify-content-end">
-    <button class="btn btn-success">Thêm công việc</button>
+    <a class="btn btn-success" asp-action="Create" asp-controller="Home">Thêm công việc</a>
 </div>
 
 <div class="w-50">
     <table class="table table-dark table-bordered rounded table-hover user-select-none">
         <thead>
             <tr>
-                <th scope="col">Id</th>
                 <th scope="col" class="w-50 align-middle">Việc cần làm</th>
                 <th scope="col" class="w-25 align-middle">Trạng thái</th>
                 <th scope="col" class="w-25 align-middle">Hành động</th>
@@ -22,7 +21,6 @@
             @foreach (var job in Model)
             {
                 <tr class="align-middle">
-                    <th scope="row">@job.Id</th>
                     <td>@job.Job</td>
                     <td>
                         @if (job.IsDone)
@@ -35,8 +33,8 @@
                         }
                     </td>
                     <td>
-                        <button type="button" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></button>
-                        <button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></button>
+                        <a class="btn btn-primary btn-sm" asp-action="Edit" asp-controller="Home" asp-route-id="@job.Id"><i class="bi bi-pencil-square"></i></a>
+                        <a class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></a>
                     </td>
                 </tr>
             }

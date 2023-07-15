@@ -7,7 +7,7 @@ namespace TodoListWeb.Models
         [Key]
         public Int64 Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Bạn chưa nhập công việc!")]
         public string? Job { get; set; }
 
         public Boolean IsDone { get; set; } = false;
