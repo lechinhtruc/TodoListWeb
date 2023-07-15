@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model IEnumerable<TodosModel>
+
+<div class="d-flex w-50 mb-2 justify-content-end">
+    <button class="btn btn-success">Thêm công việc</button>
+</div>
+
+<div class="w-50">
+    <table class="table table-dark table-bordered rounded table-hover user-select-none">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col" class="w-50 align-middle">Việc cần làm</th>
+                <th scope="col" class="w-25 align-middle">Trạng thái</th>
+                <th scope="col" class="w-25 align-middle">Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var job in Model)
+            {
+                <tr class="align-middle">
+                    <th scope="row">@job.Id</th>
+                    <td>@job.Job</td>
+                    <td>
+                        @if (job.IsDone)
+                        {
+                            <span class="badge rounded-pill bg-success">Đã xong</span>
+                        }
+                        else
+                        {
+                            <span class="badge rounded-pill bg-danger">Chưa xong</span>
+                        }
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></button>
+                        <button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></button>
+                    </td>
+                </tr>
+            }
+            @*<tr class="align-middle">
+            <th scope="row">1</th>
+            <td>Lau nhà</td>
+            <td><span class="badge rounded-pill bg-danger">Chưa xong</span></td>
+            <td>
+            <button type="button" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></button>
+            <button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></button>
+            </td>
+            </tr>
+            <tr>
+            <th scope="row">2</th>
+            <td>Quét nhà</td>
+            <td><span class="badge rounded-pill bg-success">Đã xong</span></td>
+            <td>
+            <button type="button" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></button>
+            <button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></button>
+            </td>
+            </tr>*@
+        </tbody>
+    </table>
+</div>
