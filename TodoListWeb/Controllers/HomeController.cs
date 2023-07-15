@@ -51,11 +51,11 @@ namespace TodoListWeb.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPatch]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Update(TodosModel todo)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(todo);
             }
@@ -64,6 +64,13 @@ namespace TodoListWeb.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpDelete]
+        public IActionResult Delete(Int64 id)
+        {
+            _db.tbl_todos.Remove(_db.tbl_todos.Find(id));
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
