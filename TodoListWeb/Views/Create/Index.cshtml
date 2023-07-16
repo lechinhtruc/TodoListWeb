@@ -4,7 +4,7 @@
     ViewData["Title"] = "Thêm công việc";
 }
 
-<form class="w-50 d-flex flex-column gap-2" method="post">
+<form class="w-50 d-flex flex-column gap-2" method="post" asp-action="Create" asp-controller="Create">
     <div class="mb-3">
         <label for="jobInput" class="form-label" asp-for="Job">Công việc</label>
         <input type="text" class="form-control" id="jobInput" placeholder="Tên công việc" asp-for="Job">

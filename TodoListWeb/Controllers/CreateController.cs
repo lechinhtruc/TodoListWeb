@@ -21,7 +21,7 @@ namespace TodoListWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Index(Todos todos)
+        public IActionResult Create(Todos todos)
         {
             if (!ModelState.IsValid)
             {

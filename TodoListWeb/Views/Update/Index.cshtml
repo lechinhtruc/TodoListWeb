@@ -1,12 +1,14 @@
-﻿@{
+﻿@model Todos
+
+@{
     ViewData["Title"] = "Sửa công việc";
 }
 
-@model Todos
 
-<form class="w-50 d-flex flex-column gap-2" method="post">
-    <div class="mb-3">
+<form class="w-50 d-flex flex-column gap-2" method="post" asp-action="Update" asp-controller="Update" asp-route-id="@Model.Id">
+    <div class="mb-3 d-flex flex-column">
         <label for="jobInput" class="form-label" asp-for="Job">Công việc</label>
+        @*<input type="hidden" asp-for="Id">*@
         <input type="text" class="form-control" id="jobInput" placeholder="Tên công việc" asp-for="Job">
         <span asp-validation-for="Job" class="text-danger"></span>
 
@@ -19,4 +21,10 @@
     <button type="submit" class="btn btn-success">Sửa</button>
     <a type="button" class="btn btn-outline-danger" asp-controller="Home" asp-action="Index">Quay lại</a>
 </form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
 

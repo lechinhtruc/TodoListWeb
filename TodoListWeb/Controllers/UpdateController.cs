@@ -21,11 +21,14 @@ namespace TodoListWeb.Controllers
             return View(todo);
         }
 
+
+
         //Post Method
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Index(Todos todo)
+        public IActionResult Update(Todos todo, Int64 Id)
         {
+            todo.Id = Id;
             if (!ModelState.IsValid)
             {
                 return View(todo);
