@@ -2,7 +2,7 @@
 
 namespace TodoListWeb.Models
 {
-    public class TodosModel
+    public class Todos
     {
         [Key]
         public Int64 Id { get; set; }

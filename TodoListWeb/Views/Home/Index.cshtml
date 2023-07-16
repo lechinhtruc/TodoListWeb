@@ -2,15 +2,15 @@
     ViewData["Title"] = "Home Page";
 }
 
-@model IEnumerable<TodosModel>
+@model IEnumerable<Todos>
 
 <div class="d-flex w-50 mb-2 justify-content-end">
-    <a class="btn btn-success" asp-action="Create" asp-controller="Home">Thêm công việc</a>
+    <a class="btn btn-success" asp-action="Index" asp-controller="Create">Thêm công việc</a>
 </div>
 
-<div class="w-50">
-    <table class="table table-dark table-bordered rounded table-hover user-select-none">
-        <thead>
+<div class="w-50 overflow-y-auto h-50">
+    <table class="table table-dark table-hover user-select-none">
+        <thead class="position-sticky top-0">
             <tr>
                 <th scope="col" class="w-50 align-middle">Việc cần làm</th>
                 <th scope="col" class="w-25 align-middle">Trạng thái</th>
@@ -33,29 +33,12 @@
                         }
                     </td>
                     <td>
-                        <a class="btn btn-primary btn-sm" asp-action="Update" asp-controller="Home" asp-route-id="@job.Id"><i class="bi bi-pencil-square"></i></a>
-                        <a class="btn btn-danger btn-sm" asp-action="Delete" asp-controller="Home"><i class="bi bi-trash3-fill"></i></a>
+                        <a class="btn btn-primary btn-sm" asp-action="Index" asp-controller="Update" asp-route-id="@job.Id"><i class="bi bi-pencil-square"></i></a>
+                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="@("#deleteJob-" + @job.Id)"><i class="bi bi-trash3-fill"></i></button>
+                        @await Html.PartialAsync("_DeletePartialView", job)
                     </td>
                 </tr>
             }
-            @*<tr class="align-middle">
-            <th scope="row">1</th>
-            <td>Lau nhà</td>
-            <td><span class="badge rounded-pill bg-danger">Chưa xong</span></td>
-            <td>
-            <button type="button" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></button>
-            <button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></button>
-            </td>
-            </tr>
-            <tr>
-            <th scope="row">2</th>
-            <td>Quét nhà</td>
-            <td><span class="badge rounded-pill bg-success">Đã xong</span></td>
-            <td>
-            <button type="button" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></button>
-            <button type="button" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></button>
-            </td>
-            </tr>*@
         </tbody>
     </table>
 </div>

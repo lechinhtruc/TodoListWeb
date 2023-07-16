@@ -1,21 +1,22 @@
-﻿@model TodosModel
-
-@{
-    ViewData["Title"] = "Thêm công việc";
+﻿@{
+    ViewData["Title"] = "Sửa công việc";
 }
+
+@model Todos
 
 <form class="w-50 d-flex flex-column gap-2" method="post">
     <div class="mb-3">
         <label for="jobInput" class="form-label" asp-for="Job">Công việc</label>
         <input type="text" class="form-control" id="jobInput" placeholder="Tên công việc" asp-for="Job">
         <span asp-validation-for="Job" class="text-danger"></span>
+
+        <label for="statusJob" class="form-label mt-2" asp-for="IsDone">Trạng thái</label>
+        <select class="form-select" asp-for="IsDone">
+            <option value="true">Đã xong</option>
+            <option value="false">Chưa xong</option>
+        </select>
     </div>
-    <button type="submit" class="btn btn-success">Thêm</button>
+    <button type="submit" class="btn btn-success">Sửa</button>
     <a type="button" class="btn btn-outline-danger" asp-controller="Home" asp-action="Index">Quay lại</a>
 </form>
 
-@section Scripts{
-    @{
-        <partial name="_ValidationScriptsPartial" />
-    }
-}

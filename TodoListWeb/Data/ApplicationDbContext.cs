@@ -10,6 +10,6 @@ namespace TodoListWeb.Data
 
         }
 
-        public DbSet<TodosModel> tbl_todos { get; set; }
+        public DbSet<Todos> tbl_todos { get; set; }
     }
 }
