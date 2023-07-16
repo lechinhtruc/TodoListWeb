@@ -16,7 +16,7 @@ namespace TodoListWeb.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Todos> todoList = _db.tbl_todos.ToList().OrderBy(x => x.Id);
+            IEnumerable<Todos> todoList = _db.Tbl_todos.ToList().OrderBy(x => x.Id);
             return View(todoList);
         }
 

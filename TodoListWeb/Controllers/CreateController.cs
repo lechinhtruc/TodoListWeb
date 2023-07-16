@@ -6,7 +6,6 @@ namespace TodoListWeb.Controllers
 {
     public class CreateController : Controller
     {
-
         private readonly ApplicationDbContext _db;
 
         public CreateController(ApplicationDbContext db)
@@ -14,6 +13,7 @@ namespace TodoListWeb.Controllers
             _db = db;
         }
 
+        [Route("CreateJob")]
         public IActionResult Index()
         {
             return View();
@@ -27,7 +27,7 @@ namespace TodoListWeb.Controllers
             {
                 return View(todos);
             }
-            _db.tbl_todos.Add(todos);
+            _db.Tbl_todos.Add(todos);
             _db.SaveChanges();
             return RedirectToAction("Index", "Home");
         }

@@ -14,9 +14,10 @@ namespace TodoListWeb.Controllers
             _db = db;
         }
 
+        [Route("UpdateJob")]
         public IActionResult Index(Int64 id)
         {
-            var todo = _db.tbl_todos.Find(id);
+            var todo = _db.Tbl_todos.Find(id);
             return View(todo);
         }
 
@@ -29,7 +30,7 @@ namespace TodoListWeb.Controllers
             {
                 return View(todo);
             }
-            _db.tbl_todos.Update(todo);
+            _db.Tbl_todos.Update(todo);
             _db.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
