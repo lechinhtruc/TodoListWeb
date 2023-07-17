@@ -4,14 +4,14 @@
     ViewData["Title"] = "Thêm công việc";
 }
 
-<form class="w-50 d-flex flex-column gap-2" method="post" asp-action="Create" asp-controller="Create">
+<form class="w-50 d-flex flex-column gap-2" method="post" asp-action="CreateJob" asp-controller="Job">
     <div class="mb-3">
         <label for="jobInput" class="form-label" asp-for="Job">Công việc</label>
         <input type="text" class="form-control" id="jobInput" placeholder="Tên công việc" asp-for="Job">
         <span asp-validation-for="Job" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-success">Thêm</button>
-    <a type="button" class="btn btn-outline-danger" asp-controller="Home" asp-action="Index">Quay lại</a>
+    <a type="button" class="btn btn-outline-danger" asp-controller="Job" asp-action="Index">Quay lại</a>
 </form>
 
 @section Scripts{

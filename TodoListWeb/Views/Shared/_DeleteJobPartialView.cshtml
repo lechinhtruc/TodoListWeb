@@ -8,8 +8,8 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Xoá công việc</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
             </div>
-            <form asp-action="Index" asp-controller="Delete" method="post">
-                <input asp-for="@Model.Id" readonly type="hidden"/>
+            <form asp-action="DeleteJob" asp-controller="Job" method="post">
+                <input asp-for="@Model.Id" type="hidden"/>
                 <div class="modal-body">
                     <p>Bạn có chắc chắn muốn xoá công việc: @Model.Job ?</p>
                 </div>

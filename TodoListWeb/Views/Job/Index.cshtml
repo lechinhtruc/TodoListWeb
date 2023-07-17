@@ -1,15 +1,14 @@
 ﻿@{
     ViewData["Title"] = "Trang chủ";
 }
-
 @model IEnumerable<Todos>
 
 <div class="d-flex w-50 mb-2 justify-content-end">
-    <a class="btn btn-success" asp-action="Index" asp-controller="Create">Thêm công việc</a>
+    <a class="btn btn-success" asp-action="Create" asp-controller="Job">Thêm công việc</a>
 </div>
 
 <div class="w-50 overflow-y-auto h-50">
-    <table class="table table-dark table-hover user-select-none">
+    <table class="table table-dark table-hover user-select-none jobTable">
         <thead class="position-sticky top-0">
             <tr>
                 <th scope="col" class="w-50 align-middle">Việc cần làm</th>
@@ -33,12 +32,13 @@
                         }
                     </td>
                     <td>
-                        <a class="btn btn-primary btn-sm" asp-action="Index" asp-controller="Update" asp-route-id="@job.Id"><i class="bi bi-pencil-square"></i></a>
+                        <a class="btn btn-primary btn-sm" asp-action="Update" asp-controller="Job" asp-route-id="@job.Id"><i class="bi bi-pencil-square"></i></a>
                         <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="@("#deleteJob-" + @job.Id)"><i class="bi bi-trash3-fill"></i></button>
-                        @await Html.PartialAsync("_DeletePartialView", job)
+                        @await Html.PartialAsync("_DeleteJobPartialView", job)
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+@*<script>GetAllJob();</script>*@

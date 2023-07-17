@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using TodoListWeb.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DbConnection")
 ));
+
+//builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -23,19 +26,24 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+//app.UseSwagger();
 
 app.UseAuthorization();
 
 app.MapControllerRoute(
 name: "default",
-pattern: "{controller=Home}/{action=Index}/{id?}");
+pattern: "{controller=Job}/{action=Index}");
 
-app.MapControllerRoute(
-name: "Create",
-pattern: "{controller=Create}/{action=Index}");
+//app.MapControllerRoute(
+//name: "Create",
+//pattern: "{controller=Job}/{action=CreateJob}");
 
-app.MapControllerRoute(
-name: "Update",
-pattern: "{controller=Update}/{action=Index}");
+//app.MapControllerRoute(
+//name: "Update",
+//pattern: "{controller=Job}/{action=UpdateJob}");
+
+//app.UseSwaggerUI();
+
+
 
 app.Run();
