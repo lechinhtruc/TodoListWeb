@@ -1,7 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Trang chủ";
 }
-@model IEnumerable<Todos>
+
+@model IEnumerable<TodoModel>
 
 <div class="d-flex w-50 mb-2 justify-content-end">
     <a class="btn btn-success" asp-action="Create" asp-controller="Job">Thêm công việc</a>
@@ -20,7 +21,7 @@
             @foreach (var job in Model)
             {
                 <tr class="align-middle">
-                    <td>@job.Job</td>
+                    <td>@job.JobName</td>
                     <td>
                         @if (job.IsDone)
                         {
@@ -41,4 +42,4 @@
         </tbody>
     </table>
 </div>
-@*<script>GetAllJob();</script>*@
+@*<script>Load();</script>*@

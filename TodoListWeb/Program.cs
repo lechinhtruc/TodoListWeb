@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
 using TodoListWeb.Data;
+using TodoListWeb.Interfaces;
+using TodoListWeb.Repositories;
+using TodoListWeb.UnitOfWork;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,8 +11,11 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DbConnection")
 ));
+builder.Services.AddSwaggerGen();
 
-//builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IJobRepository, JobRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 
@@ -26,7 +31,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-//app.UseSwagger();
+app.UseSwagger();
 
 app.UseAuthorization();
 
@@ -42,7 +47,7 @@ pattern: "{controller=Job}/{action=Index}");
 //name: "Update",
 //pattern: "{controller=Job}/{action=UpdateJob}");
 
-//app.UseSwaggerUI();
+app.UseSwaggerUI();
 
 
 

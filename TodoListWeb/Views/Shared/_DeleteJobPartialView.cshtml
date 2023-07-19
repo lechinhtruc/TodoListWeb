@@ -1,24 +1,56 @@
-﻿@model Todos
+﻿@model TodoModel
 
 <!-- Modal -->
-<div class="modal fade" id="deleteJob-@Model.Id" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+<div class="modal fade"
+     id="deleteJob-@Model.Id"
+     tabindex="-1"
+     aria-labelledby="deleteModal"
+     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Xoá công việc</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Đóng"></button>
             </div>
-            <form asp-action="DeleteJob" asp-controller="Job" method="post">
-                <input asp-for="@Model.Id" type="hidden"/>
+            <form id="deleteForm-@Model.Id">
+                <input asp-for="@Model.Id" type="hidden" id="jobId" />
                 <div class="modal-body">
-                    <p>Bạn có chắc chắn muốn xoá công việc: @Model.Job ?</p>
+                    <p>Bạn có chắc chắn muốn xoá công việc: @Model.JobName ?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                    <button type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                        Huỷ
+                    </button>
                     <button type="submit" class="btn btn-danger">Xoá</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+<script>//Need fix 
+    var jobId = $('#jobId').val();
+    $(`#deleteForm-${jobId}`).on('submit', (e) => {
+        e.preventDefault();
+        $.ajax({
+            type: 'DELETE',
+            url: `/api/DeleteJob/${jobId}`,
+            contentType: 'application/json',
+            error: function (err) {
+                console.log(err)
+            },
+            success: function (response) {
+                console.log(response)
+            },
+            complete: function () {
+                //$(".modal").hide();
+                //window.location.href = '/';
+            },
+        });
+    })
+</script>
 

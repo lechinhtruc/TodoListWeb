@@ -1,19 +1,19 @@
-﻿@model Todos
+﻿@model TodoModel
 
 @{
     ViewData["Title"] = "Sửa công việc";
 }
 
 
-<form class="w-50 d-flex flex-column gap-2" method="post" asp-action="UpdateJob" asp-controller="Job">
+<form class="w-50 d-flex flex-column gap-2 update-form">
     <div class="mb-3 d-flex flex-column">
-        <label for="jobInput" class="form-label" asp-for="Job">Công việc</label>
-        <input type="hidden" asp-for="Id">
-        <input type="text" class="form-control" id="jobInput" placeholder="Tên công việc" asp-for="Job">
-        <span asp-validation-for="Job" class="text-danger"></span>
+        <label class="form-label" asp-for="JobName">Công việc</label>
+        <input type="hidden" asp-for="Id" id="jobId">
+        <input type="text" class="form-control" id="jobInput" placeholder="Tên công việc" asp-for="JobName">
+        <span asp-validation-for="JobName" class="text-danger"></span>
 
-        <label for="statusJob" class="form-label mt-2" asp-for="IsDone">Trạng thái</label>
-        <select class="form-select" asp-for="IsDone">
+        <label for="statusJob" class="form-label mt-2">Trạng thái</label>
+        <select class="form-select" title="isDoneJobSelect" asp-for="IsDone">
             <option value="true">Đã xong</option>
             <option value="false">Chưa xong</option>
         </select>
@@ -21,6 +21,34 @@
     <button type="submit" class="btn btn-success">Sửa</button>
     <a type="button" class="btn btn-outline-danger" asp-controller="Job" asp-action="Index">Quay lại</a>
 </form>
+
+<script>
+    $('.update-form').on("submit", (e) => {
+        e.preventDefault();
+        const data = JSON.stringify({
+            "id": parseInt($('#jobId').val()),
+            "jobName": $('#jobInput').val(),
+            "isDone": JSON.parse($('.form-select').val())
+        });
+        //console.log(data)
+        //console.log(parseInt($('#jobId').val()), $('#jobInput').val(), Boolean($('.form-select').val()))
+        $.ajax({
+            type: 'PUT',
+            url: '/api/UpdateJob',
+            contentType: 'application/json',
+            data: data,
+            error: function (err) {
+                console.log(err)
+            },
+            success: function (response) {
+            },
+            complete: function () {
+                //$(".modal").hide();
+                window.location.href = '/';
+            },
+        });
+    })
+</script>
 
 @section Scripts{
     @{
