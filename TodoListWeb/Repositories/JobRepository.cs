@@ -21,7 +21,7 @@ namespace TodoListWeb.Repositories
                 JobName = job.JobName,
                 IsDone = false,
                 StartDate = DateTime.Now,
-                EndDate = DateTime.Now.AddMinutes(1),
+                EndDate = DateTime.Now.AddMinutes(5),
             };
             await _db.Tbl_todos.AddAsync(todo);
             return todo;
@@ -64,11 +64,15 @@ namespace TodoListWeb.Repositories
         public async Task<object> IsExpiredJob(Int64 Id)
         {
             var job = await _db.Tbl_todos.SingleOrDefaultAsync(x => x.Id == Id);
-            if (DateTime.Now < job?.EndDate)
+            if (job != null)
             {
-                return new { expired = false, msg = "" };
+                if (DateTime.Now < job?.EndDate)
+                {
+                    return new { expired = false, msg = "" };
+                }
+                return new { expired = true, msg = $"{job.JobName} is expired at {job.EndDate}" };
             }
-            return new { expired = true, msg = $"{job.JobName} is expired at {job.EndDate}" };
+            return new { };
         }
     }
 }

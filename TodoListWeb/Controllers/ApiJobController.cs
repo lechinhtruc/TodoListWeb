@@ -88,10 +88,18 @@ namespace TodoListWeb.Controllers
             }
         }
 
-        [HttpGet("{Id}")]
-        public async Task<IActionResult> CheckJobExpired(Int64 Id)
+        [HttpGet]
+        public async Task<IActionResult> CheckJobExpired(Int64 jobId)
         {
-            return Ok(new { status = 200, data = await _unitOfWork.Job.IsExpiredJob(Id) });
+            try
+            {
+
+                return Ok(new { status = 200, data = await _unitOfWork.Job.IsExpiredJob(jobId) });
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
     }
 }
