@@ -58,7 +58,7 @@ namespace TodoListWeb.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPatch]
         public async Task<IActionResult> UpdateJob(TodoModel todo)
         {
             try
@@ -73,7 +73,7 @@ namespace TodoListWeb.Controllers
             }
         }
 
-        [HttpDelete("{Id}")]
+        [HttpDelete]
         public async Task<IActionResult> DeleteJob(Int64 Id)
         {
             try

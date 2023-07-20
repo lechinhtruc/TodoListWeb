@@ -20,7 +20,7 @@
         <tbody>
             @foreach (var job in Model)
             {
-                <tr class="align-middle">
+                <tr class="align-middle" id="job-@job.Id">
                     <td>@job.JobName</td>
                     <td>
                         @if (job.IsDone)
@@ -34,12 +34,11 @@
                     </td>
                     <td>
                         <a class="btn btn-primary btn-sm" asp-action="Update" asp-controller="Job" asp-route-id="@job.Id"><i class="bi bi-pencil-square"></i></a>
-                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="@("#deleteJob-" + @job.Id)"><i class="bi bi-trash3-fill"></i></button>
-                        @await Html.PartialAsync("_DeleteJobPartialView", job)
+                        <button class="btn btn-danger btn-sm" onclick="DeleteJob(@job.Id)"><i class="bi bi-trash3-fill"></i></button>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
-@*<script>Load();</script>*@
+@await Html.PartialAsync("_DeleteJobPartialView")

@@ -1,8 +1,6 @@
-﻿@model TodoModel
-
-<!-- Modal -->
+﻿<!-- Modal -->
 <div class="modal fade"
-     id="deleteJob-@Model.Id"
+     id="delete-modal"
      tabindex="-1"
      aria-labelledby="deleteModal"
      aria-hidden="true">
@@ -15,10 +13,10 @@
                         data-bs-dismiss="modal"
                         aria-label="Đóng"></button>
             </div>
-            <form id="deleteForm-@Model.Id">
-                <input asp-for="@Model.Id" type="hidden" id="jobId" />
+            <form id="delete-form">
+                <input type="hidden" id="jobId" />
                 <div class="modal-body">
-                    <p>Bạn có chắc chắn muốn xoá công việc: @Model.JobName ?</p>
+                    <p class="delete-confirm">Bạn có chắc chắn muốn xoá công việc: </p>
                 </div>
                 <div class="modal-footer">
                     <button type="button"
@@ -32,25 +30,3 @@
         </div>
     </div>
 </div>
-<script>//Need fix 
-    var jobId = $('#jobId').val();
-    $(`#deleteForm-${jobId}`).on('submit', (e) => {
-        e.preventDefault();
-        $.ajax({
-            type: 'DELETE',
-            url: `/api/DeleteJob/${jobId}`,
-            contentType: 'application/json',
-            error: function (err) {
-                console.log(err)
-            },
-            success: function (response) {
-                console.log(response)
-            },
-            complete: function () {
-                //$(".modal").hide();
-                //window.location.href = '/';
-            },
-        });
-    })
-</script>
-
