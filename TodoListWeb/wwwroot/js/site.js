@@ -4,13 +4,13 @@
     createJobPath: '/CreateJob',
     deleteJobPath: '/DeleteJob',
     updateJobPath: '/UpdateJob',
+    checkJobExpiredPath: '/CheckJobExpired'
 }
 
 const text = {
     deleteConfirm: 'Bạn có chắc chắn muốn xoá công việc:',
     deleteModalTitle: 'Xoá công việc'
 }
-
 
 const DeleteJob = (jobId) => {
     const url = config.apiPath + `${config.getJobPath}/${jobId}`
@@ -26,7 +26,30 @@ const DeleteJob = (jobId) => {
     })
 }
 
+const checkJobExpired = async (jobId) => {
+    const url = config.apiPath + `${config.checkJobExpiredPath}/?jobId=${jobId}`
+    return await $.ajax({
+        url, contentType: 'application/json'
+    })
+}
+
 $(document).ready(() => {
+    $('.jobTable > tbody > tr').map((index, job) => {
+        const jobId = $(job).attr('id').split('-')[1];
+        const interval = setInterval(async () => {
+            await checkJobExpired(jobId).then(({ data }) => {
+                if (data?.expired) { //hết hạn
+                    clearInterval(interval);
+                    alert(data.msg)
+                } if (Object.keys(data).length === 0) {
+                    clearInterval(interval);
+                }
+            }).catch(err => {
+                throw err
+            })
+        }, 1000)
+    })
+
     $(`#delete-form`).on('submit', (e) => {
         e.preventDefault();
 
