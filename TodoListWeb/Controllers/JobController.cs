@@ -35,13 +35,10 @@ namespace TodoListWeb.Controllers
             return View(await _unitOfWork.Job.GetJobByIdAsync(Id));
         }
 
-        public async Task<ActionResult> ExportToExcel()
+        public async Task<IActionResult> ExportToExcel()
         {
-            //   var fileName = DateTime.Now;
-            using var wb = await _unitOfWork.Job.ExportToExcel();
-            // Add ClosedXML.Extensions in your using declarations
-
-            return wb.Deliver("generatedfile.xlsx");
+            var stream = await _unitOfWork.Job.ExportToExcel();
+            return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Export_Todo_List_" + DateTime.Now.ToString());
         }
     }
 }

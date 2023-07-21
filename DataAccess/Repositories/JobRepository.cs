@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using TodoListWeb.Interfaces;
 using ClosedXML.Excel;
 using System.Data;
-using Newtonsoft.Json;
 using System.Reflection;
 
 namespace TodoListWeb.Repositories
@@ -26,7 +25,6 @@ namespace TodoListWeb.Repositories
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddMinutes(5),
             };
-            //await _db.Tbl_todos.AddAsync(todo);
             await _db.Tbl_todos.AddAsync(todo);
             return todo;
         }
@@ -79,6 +77,17 @@ namespace TodoListWeb.Repositories
             return new { };
         }
 
+        public async Task<MemoryStream> ExportToExcel()
+        {
+            XLWorkbook workbook = new();
+            MemoryStream stream = new();
+            DataTable table = ListToDataTable(await _db.Tbl_todos.OrderBy(x => x.Id).ToListAsync(), "Todo");
+
+            var worksheet = workbook.AddWorksheet();
+            worksheet.FirstCell().InsertTable(table, true);
+            workbook.SaveAs(stream);
+            return stream;
+        }
 
         public static DataTable ListToDataTable<T>(List<T> list, string _tableName)
         {
@@ -100,15 +109,6 @@ namespace TodoListWeb.Repositories
             return dt;
         }
 
-        public async Task<XLWorkbook> ExportToExcel()
-        {
-            using (var workbook = new XLWorkbook())
-            {
-                var worksheet = workbook.AddWorksheet();
-                DataTable table = ListToDataTable(await _db.Tbl_todos.OrderBy(x => x.Id).ToListAsync(), "Todo");
-                worksheet.FirstCell().InsertTable(table, true);
-                return workbook;
-            }
-        }
+
     }
 }

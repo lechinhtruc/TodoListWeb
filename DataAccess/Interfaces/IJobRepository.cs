@@ -17,6 +17,6 @@ namespace TodoListWeb.Interfaces
 
         public Task<object> IsExpiredJob(long Id);
 
-        public Task<XLWorkbook> ExportToExcel();
+        public Task<MemoryStream> ExportToExcel();
     }
 }
