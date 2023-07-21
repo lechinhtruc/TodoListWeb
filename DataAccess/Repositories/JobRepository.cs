@@ -34,7 +34,7 @@ namespace TodoListWeb.Repositories
         public async Task<TodoModel> GetJobByIdAsync(long Id)
         {
             var job = await _db.Tbl_todos.FirstOrDefaultAsync(x => x.Id == Id);
-            return job;
+            return job ?? new TodoModel() { JobName = "" };
         }
 
         public async Task<TodoModel> UpdateJobAsync(TodoModel job)
@@ -69,7 +69,7 @@ namespace TodoListWeb.Repositories
                 {
                     return new { expired = false, msg = "" };
                 }
-                return new { expired = true, msg = $"{job.JobName} is expired at {job.EndDate}" };
+                return new { expired = true, msg = $"{job?.JobName} is expired at {job?.EndDate}" };
             }
             return new { };
         }
