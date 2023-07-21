@@ -34,7 +34,7 @@
                     </td>
                     <td>
                         <a class="btn btn-primary btn-sm" asp-action="Update" asp-controller="Job" asp-route-id="@job.Id"><i class="bi bi-pencil-square"></i></a>
-                        <button class="btn btn-danger btn-sm" onclick="DeleteJob(@job.Id)"><i class="bi bi-trash3-fill"></i></button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteJob(@job.Id)"><i class="bi bi-trash3-fill"></i></button>
                     </td>
                 </tr>
             }

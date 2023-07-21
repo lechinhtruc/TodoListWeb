@@ -12,7 +12,7 @@ const text = {
     deleteModalTitle: 'Xoá công việc'
 }
 
-const DeleteJob = (jobId) => {
+const deleteJob = (jobId) => {
     const url = config.apiPath + `${config.getJobPath}/${jobId}`
     $.ajax({
         url,
@@ -45,9 +45,9 @@ $(document).ready(() => {
                     clearInterval(interval);
                 }
             }).catch(err => {
-                throw err
+                throw err;
             })
-        }, 1000)
+        }, 5000)
     })
 
     $(`#delete-form`).on('submit', (e) => {
