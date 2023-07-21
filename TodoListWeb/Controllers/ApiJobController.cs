@@ -16,7 +16,6 @@ namespace TodoListWeb.Controllers
             _unitOfWork = unitOfWork;
         }
 
-
         [HttpGet]
         public async Task<IActionResult> GetAllJob()
         {
@@ -63,9 +62,9 @@ namespace TodoListWeb.Controllers
         {
             try
             {
-                await _unitOfWork.Job.UpdateJobAsync(todo);
+                var updatedJob = await _unitOfWork.Job.UpdateJobAsync(todo);
                 await _unitOfWork.Save();
-                return Ok(new { status = 200, update = "success" });
+                return Ok(new { status = 200, update = updatedJob });
             }
             catch (Exception ex)
             {

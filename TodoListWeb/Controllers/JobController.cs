@@ -3,6 +3,7 @@ using TodoListWeb.Interfaces;
 
 namespace TodoListWeb.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class JobController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
