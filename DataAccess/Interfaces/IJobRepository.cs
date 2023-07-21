@@ -1,3 +1,4 @@
+using ClosedXML.Excel;
 using TodoListWeb.Models;
 
 namespace TodoListWeb.Interfaces
@@ -15,5 +16,7 @@ namespace TodoListWeb.Interfaces
         public Task<bool> DeleteJobAsync(long Id);
 
         public Task<object> IsExpiredJob(long Id);
+
+        public Task<XLWorkbook> ExportToExcel();
     }
 }

@@ -4,8 +4,9 @@
 
 @model IEnumerable<TodoModel>
 
-<div class="d-flex w-50 mb-2 justify-content-end">
+<div class="d-flex w-50 mb-2 justify-content-end gap-2">
     <a class="btn btn-success" asp-action="Create" asp-controller="Job">Thêm công việc</a>
+    <a class="btn btn-primary" asp-action="ExportToExcel" asp-controller="Job">Xuất excel</a>
 </div>
 
 <div class="w-50 overflow-y-auto h-50">

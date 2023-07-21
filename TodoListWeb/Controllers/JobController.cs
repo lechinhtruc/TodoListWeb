@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ClosedXML.Extensions;
+using Microsoft.AspNetCore.Mvc;
 using TodoListWeb.Interfaces;
+using TodoListWeb.Models;
 
 namespace TodoListWeb.Controllers
 {
@@ -31,6 +33,15 @@ namespace TodoListWeb.Controllers
         public async Task<IActionResult> Update(Int64 Id)
         {
             return View(await _unitOfWork.Job.GetJobByIdAsync(Id));
+        }
+
+        public async Task<ActionResult> ExportToExcel()
+        {
+            //   var fileName = DateTime.Now;
+            using var wb = await _unitOfWork.Job.ExportToExcel();
+            // Add ClosedXML.Extensions in your using declarations
+
+            return wb.Deliver("generatedfile.xlsx");
         }
     }
 }
