@@ -93,7 +93,6 @@ namespace TodoListWeb.Controllers
         {
             try
             {
-
                 return Ok(new { status = 200, data = await _unitOfWork.Job.IsExpiredJob(jobId) });
             }
             catch

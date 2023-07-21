@@ -23,6 +23,7 @@ namespace TodoListWeb.Repositories
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddMinutes(5),
             };
+            //await _db.Tbl_todos.AddAsync(todo);
             await _db.Tbl_todos.AddAsync(todo);
             return todo;
         }
@@ -70,7 +71,7 @@ namespace TodoListWeb.Repositories
                 {
                     return new { expired = false, msg = "" };
                 }
-                return new { expired = true, msg = $"{job.JobName} is expired at {job.EndDate}" };
+                return new { expired = true, msg = $"{job?.JobName} is expired at {job?.EndDate}" };
             }
             return new { };
         }

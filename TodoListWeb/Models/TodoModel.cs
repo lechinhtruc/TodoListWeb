@@ -14,7 +14,6 @@ namespace TodoListWeb.Models
 
         public bool IsDone { get; set; }
 
-
         [JsonIgnore]
         public DateTime? StartDate { get; set; }
 
